@@ -11,24 +11,29 @@ function Login() {
   const [password, setPassword] = useState("");
 
   // funcion que se ejecuta cuando hace click en login
-  async function handleSubmit(e) { 
-    e.preventDefault(); // evita que el formulario recargue la pagina
+  async function handleSubmit(e) {
+  e.preventDefault();
 
-    // React llama al backend flask
-    const response = await fetch("http://127.0.0.1:5000/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password
-      })
-    });
+  const response = await fetch("http://127.0.0.1:5000/api/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      email,
+      password
+    })
+  });
 
-    const data = await response.json(); // convierte la respuesta en objeto JS
-    login(data.token); // guarda el token en localStorage y actualiza el estado
+  if (!response.ok) {
+    alert("Email o contraseña incorrectos");
+    return;
   }
+
+  const data = await response.json();
+  login(data.token);
+}
+
 
   // se ejecuta handleSubmit cuando presiona el boton
   return (

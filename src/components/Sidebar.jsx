@@ -1,21 +1,29 @@
 export default function Sidebar({ setView }) {
   return (
-    <div className="sidebar">
-      <h2>Shop Admin</h2>
+    <aside className="sidebar">
+    
+      <nav className="sidebar-nav">
+        <button
+          className="sidebar-btn"
+          onClick={() => setView("products")}
+        >
+          Products
+        </button>
 
-      <button
-        className="sidebar-btn"
-        onClick={() => setView("products")}
-      >
-        Products
-      </button>
+        <button
+          className="sidebar-btn"
+          onClick={() => setView("customers")}
+        >
+          Customers
+        </button>
 
-      <button
-        className="sidebar-btn"
-        onClick={() => setView("customers")}
-      >
-        Customers
-      </button>
-    </div>
+        <button
+          className="sidebar-btn cart-btn"
+          onClick={() => setView("cart")}
+        >
+          View cart
+        </button>
+      </nav>
+    </aside>
   );
 }

@@ -1,31 +1,23 @@
-const API_URL =  "http://127.0.0.1:5000/api";
+const API_URL = "http://127.0.0.1:5000/api";
 
+// endpoint = "/orders", "/customers", etc
+// options = { method, body }
+export async function fetchWithAuth(endpoint, options = {}) {
+  const token = localStorage.getItem("token");
 
+  const response = await fetch(API_URL + endpoint, {
+    method: options.method || "GET",   //  acepta POST
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token,
+      ...(options.headers || {})
+    },
+    body: options.body || null          //acepta body
+  });
 
-//en endpoint estan las diferentes rutas: login, items , external
-export async function fetchWithAuth(endpoint){
-    const token = localStorage.getItem("token"); //busca el token al hacer login
+  if (!response.ok) {
+    throw new Error("Error en la petición");
+  }
 
-
-//se forma la url completa
-    const response = await fetch(API_URL+endpoint,{
-        headers:{
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + token   //Aquí se envía el JWT al backend
-        }
-    });
-
-    if(!response.ok){
-        throw new Error("Error en la peticion");
-  
-    }
-
-
-    //data guarda el resultado final, ahora data es un objeyo o array usable
-    const data = await response.json();
-    return data;
-
-
+  return response.json();
 }
-
-
