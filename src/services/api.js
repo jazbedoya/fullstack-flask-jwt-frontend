@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:5000/api";
+const API_URL = import.meta.env.VITE_API_URL;
 
 // endpoint = "/orders", "/customers", etc
 // options = { method, body }
@@ -6,13 +6,13 @@ export async function fetchWithAuth(endpoint, options = {}) {
   const token = localStorage.getItem("token");
 
   const response = await fetch(API_URL + endpoint, {
-    method: options.method || "GET",   //  acepta POST
+    method: options.method || "GET",
     headers: {
       "Content-Type": "application/json",
       "Authorization": "Bearer " + token,
       ...(options.headers || {})
     },
-    body: options.body || null          //acepta body
+    body: options.body || null
   });
 
   if (!response.ok) {
