@@ -1,7 +1,5 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
-// endpoint = "/orders", "/customers", etc
-// options = { method, body }
 export async function fetchWithAuth(endpoint, options = {}) {
   const token = localStorage.getItem("token");
 
