@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-// Componente Register
+const API_URL = import.meta.env.VITE_API_URL;
+
 function Register() {
   const navigate = useNavigate();
 
@@ -11,14 +12,14 @@ function Register() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const response = await fetch("http://127.0.0.1:5000/api/register", {
+    const response = await fetch(`${API_URL}/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        email: email,
-        password: password
+        email,
+        password
       })
     });
 
@@ -28,7 +29,7 @@ function Register() {
     }
 
     alert("User registered successfully");
-    navigate("/"); // vuelve al login
+    navigate("/");
   }
 
   return (
@@ -50,17 +51,10 @@ function Register() {
 
         <button>Register</button>
 
-
-         <p>
-        Already have an account? <Link to="/">Login</Link>
+        <p>
+          Already have an account? <Link to="/">Login</Link>
         </p>
-        
-
-
-
       </form>
-
-      
     </div>
   );
 }
