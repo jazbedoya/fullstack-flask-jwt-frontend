@@ -39,13 +39,13 @@ function Register() {
 
         <input
           type="email"
-          placeholder="Email"
+          placeholder="Ej: usuario@correo.com"
           onChange={(e) => setEmail(e.target.value)}
         />
 
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Ej: minimo8Caracteres!"
           onChange={(e) => setPassword(e.target.value)}
         />
 

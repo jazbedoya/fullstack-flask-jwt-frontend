@@ -40,13 +40,13 @@ function Login() {
 
         <input
           type="email"
-          placeholder="Email"
+          placeholder="Esribe tu email"
           onChange={(e) => setEmail(e.target.value)}
         />
 
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Escribe tu contraseña"
           onChange={(e) => setPassword(e.target.value)}
         />
 
