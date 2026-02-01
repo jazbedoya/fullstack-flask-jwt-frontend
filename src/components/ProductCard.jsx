@@ -1,35 +1,39 @@
-import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 
 export default function ProductCard({ product }) {
+  const navigate = useNavigate();
   const { addToCart } = useContext(CartContext);
   const [added, setAdded] = useState(false);
 
-  function handleAdd() {
+  function handleAdd(e) {
+    e.stopPropagation(); // 👈 evita navegar
     addToCart(product);
     setAdded(true);
-
-    setTimeout(() => {
-      setAdded(false);
-    }, 2000);
+    setTimeout(() => setAdded(false), 2000);
   }
 
   return (
-    <div className="card">
+    <div
+      className="card"
+      onClick={() =>
+        navigate(`/product/${product.id}`, {
+          state: { product }
+        })
+      }
+      style={{ cursor: "pointer" }}
+    >
       <img src={product.image} alt={product.name} />
       <h4>{product.name}</h4>
       <p>{product.brand}</p>
       <strong>${product.price}</strong>
 
       <button className="add-to-cart-btn" onClick={handleAdd}>
-        Add to Carrito
+        Add to Cart
       </button>
 
-      {added && (
-        <p style={{ color: "green", marginTop: "8px" }}>
-          Producto añadido al carrito
-        </p>
-      )}
+      {added && <p style={{ color: "green" }}>Añadido ✔</p>}
     </div>
   );
 }

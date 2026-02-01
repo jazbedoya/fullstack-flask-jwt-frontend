@@ -493,4 +493,18 @@ button:hover {
   box-shadow: 0 1px 4px rgba(0,0,0,0.04);
 }
 
+.carousel {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 20px 0;
+}
 
+.carousel::-webkit-scrollbar {
+  height: 6px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+  background: #000;
+  border-radius: 4px;
+}

@@ -5,7 +5,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
 import Cart from "./pages/Cart";
-
+import ProductDetail from "./pages/ProductDetails";
 export default function App() {
   const { token } = useContext(AuthContext);
 
@@ -31,6 +31,19 @@ export default function App() {
       <Route
         path="/dashboard"
         element={token ? <Dashboard /> : <Navigate to="/" />}
+      />
+
+
+       <Route
+        path="/cart"
+        element={token ? <Cart />: <Navigate to="/" /> }
+
+      />
+
+       <Route
+        path="/product/:id"
+        element={token ? <ProductDetail /> : <Navigate to="/" />}
+
       />
     </Routes>
   );
