@@ -28,20 +28,23 @@ export default function ProductCard({ product }) {
       <h4>{product.name}</h4>
       <p>{product.brand}</p>
       <strong>${product.price}</strong>
+        <button
+          className="add-to-cart-btn"
+          onClick={handleAdd}
+          style={{
+            backgroundColor: "#354f6a",
+            color: "white"
+          }}
+        >
+          Añadir al carrito
+        </button>
 
-     <button
-        className="add-to-cart-btn"
-        onClick={handleAdd}
-        style={{
-          backgroundColor: added ? "green" : " #354f6a",
-          color: "white"
-        }}
-      >
-        {added ? "Añadido al carrito ✔" : "Añadir al carrito"}
-      </button>
+        {added && (
+          <p style={{ color: "green", marginTop: "8px" }}>
+            Añadido ✔
+          </p>
+        )}
 
-
-      {added && <p style={{ color: "green" }}>Añadido ✔</p>}
     </div>
   );
 }
