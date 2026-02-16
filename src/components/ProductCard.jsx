@@ -8,7 +8,7 @@ export default function ProductCard({ product }) {
   const [added, setAdded] = useState(false);
 
   function handleAdd(e) {
-    e.stopPropagation(); // 👈 evita navegar
+    e.stopPropagation(); //
     addToCart(product);
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
@@ -29,9 +29,17 @@ export default function ProductCard({ product }) {
       <p>{product.brand}</p>
       <strong>${product.price}</strong>
 
-      <button className="add-to-cart-btn" onClick={handleAdd}>
-        Add to Cart
+     <button
+        className="add-to-cart-btn"
+        onClick={handleAdd}
+        style={{
+          backgroundColor: added ? "green" : "#007bff",
+          color: "white"
+        }}
+      >
+        {added ? "Añadido al carrito ✔" : "Añadir al carrito"}
       </button>
+
 
       {added && <p style={{ color: "green" }}>Añadido ✔</p>}
     </div>

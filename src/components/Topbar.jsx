@@ -6,7 +6,7 @@ export default function Topbar() {
 
   return (
     <header className="topbar">
-      {/* IZQUIERDA */}
+     
       <div className="topbar-left">
         <h2 className="topbar-title">
           Bienvenido{user?.name ? `, ${user.name}` : ""} 
@@ -14,7 +14,7 @@ export default function Topbar() {
         
       </div>
 
-      {/* DERECHA */}
+     
       <div className="topbar-actions">
         <button className="logout-btn" onClick={logout}>
           Logout
