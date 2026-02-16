@@ -33,7 +33,7 @@ export default function ProductCard({ product }) {
         className="add-to-cart-btn"
         onClick={handleAdd}
         style={{
-          backgroundColor: added ? "green" : "#007bff",
+          backgroundColor: added ? "green" : " #354f6a",
           color: "white"
         }}
       >

@@ -6,7 +6,7 @@ function RelatedCarousel({ category }) {
   const [products, setProducts] = useState([]);
   const [index, setIndex] = useState(0);
 
-  const visibleItems = 3; // cuantos se ven a la vez
+  const visibleItems = 5; // cuantos se ven a la vez
 
   useEffect(() => {
     if (!category) return;

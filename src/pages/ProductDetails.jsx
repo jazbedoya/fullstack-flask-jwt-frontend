@@ -11,8 +11,11 @@ export default function ProductDetail() {
 
   const product = state?.product;
   const { addToCart } = useContext(CartContext);
-  const [related, setRelated] = useState([]);
 
+  const [related, setRelated] = useState([]);
+  const [added, setAdded] = useState(false);
+
+  // Cargar productos relacionados
   useEffect(() => {
     if (product?.category) {
       fetchWithAuth(`/external/related?category=${product.category}`)
@@ -21,12 +24,22 @@ export default function ProductDetail() {
     }
   }, [product]);
 
+  // Manejar añadir al carrito
+  function handleAdd() {
+    addToCart(product);
+    setAdded(true);
+
+    setTimeout(() => {
+      setAdded(false);
+    }, 2000);
+  }
+
   if (!product) return <p>Producto no encontrado</p>;
 
   return (
     <div style={{ padding: "20px" }}>
 
-      {/* 🔙 VOLVER AL DASHBOARD */}
+      {/* 🔙 VOLVER */}
       <button
         onClick={() => navigate("/dashboard")}
         style={{
@@ -41,17 +54,29 @@ export default function ProductDetail() {
         ← Volver al catálogo
       </button>
 
-      {/* DETALLE */}
+      {/* DETALLE PRODUCTO */}
       <div style={{ display: "flex", gap: "40px" }}>
-        <img src={product.image} width="300" />
+        <img src={product.image} width="300" alt={product.name} />
 
         <div>
           <h2>{product.name}</h2>
           <p>{product.brand}</p>
           <h3>${product.price}</h3>
 
-          <button onClick={() => addToCart(product)}>
-            Add to Cart
+          <button
+            onClick={handleAdd}
+            disabled={added}
+            style={{
+              backgroundColor: added ? "green" : " #354f6a",
+              opacity: added ? 0.8 : 1,
+              color: "white",
+              padding: "10px 15px",
+              border: "none",
+              borderRadius: "5px",
+              cursor: added ? "default" : "pointer"
+            }}
+          >
+            {added ? "Añadido al carrito ✔" : "Añadir al carrito"}
           </button>
         </div>
       </div>
@@ -59,8 +84,16 @@ export default function ProductDetail() {
       {/* RELACIONADOS */}
       <h3 style={{ marginTop: "40px" }}>Productos relacionados</h3>
 
-      <div className="carousel">
-        {related.map(p => (
+      <div
+        className="carousel"
+        style={{
+          display: "flex",
+          gap: "20px",
+          overflowX: "auto",
+          padding: "10px 0"
+        }}
+      >
+        {related.map((p) => (
           <ProductCard key={p.id} product={p} />
         ))}
       </div>
